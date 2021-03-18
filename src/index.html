@@ -8,20 +8,37 @@
   For examples of using it with HtmlWebpackPlugin,
   see https://github.com/jaketrent/html-webpack-template/blob/master/index.ejs
   -->
-  
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta name="keyword" content="" />
+    <title>Admin</title>
     <!--
-    The htmlWebpackPlugin will parse the logic below so that trackJS is only added to the production version of index.html 
+    The htmlWebpackPlugin will parse the logic below so that trackJS is only added to the production version of index.html
     (since only webpack.config.prod.js provides the trackJS token)
     This is an example of how to add features to index.html for only one environment.
     -->
     <% if (htmlWebpackPlugin.options.trackJSToken) { %>
     <!-- BEGIN TRACKJS -->
-    <script type="text/javascript">window._trackJs = { token: '<%=htmlWebpackPlugin.options.trackJSToken%>' };</script>
-    <script type="text/javascript" src="https://cdn.trackjs.com/releases/current/tracker.js"></script>
+    <script type="text/javascript">
+      window._trackJs = { token: '<%=htmlWebpackPlugin.options.trackJSToken%>' }
+    </script>
+    <script
+      type="text/javascript"
+      src="https://cdn.trackjs.com/releases/current/tracker.js"
+    ></script>
     <!-- END TRACKJS -->
     <% } %>
   </head>
@@ -37,5 +54,16 @@
       </thead>
       <tbody id="users"></tbody>
     </table>
+
+    <!--
+        This HTML file is a template.
+        If you open it directly in the browser, you will see an empty page.
+
+        You can add webfonts, meta tags, or analytics to this file.
+        The build step will place the bundled scripts into the <body> tag.
+
+        To begin the development, run `npm start` or `yarn start`.
+        To create a production bundle, use `npm run build` or `yarn build`.
+      -->
   </body>
 </html>
