@@ -1,63 +1,145 @@
 {
-  "name": "javascript-development-environment",
+  "name": "starterkit",
   "version": "1.0.0",
-  "description": "JavaScript development environment for multiple teams",
-  "scripts": {
-    "prestart": "babel-node buildScripts/startMessage.js",
-    "start": "npm-run-all --parallel open:src lint:watch test:watch start-mockapi",
-    "open:src": "babel-node buildScripts/srcServer.js",
-    "localtunnel": "lt --port 3000",
-    "share": "npm-run-all --parallel start localtunnel",
-    "lint": "esw webpack.config.* src buildScripts --color",
-    "lint:watch": "npm run lint -- --watch",
-    "test": "mocha --reporter progress buildScripts/testSetup.js \"src/**/*.test.js\"",
-    "test:watch": "npm run test -- --watch",
-    "generate-mock-data": "babel-node buildScripts/generateMockData",
-    "prestart-mockapi": "npm run generate-mock-data",
-    "start-mockapi": "json-server --watch src/api/db.json --port 3001",
-    "clean-dist": "rimraf ./dist && mkdir dist",
-    "prebuild": "npm-run-all clean-dist test lint",
-    "build": "babel-node buildScripts/build.js",
-    "postbuild": "babel-node buildScripts/distServer.js",
-    "deploy": "surge ./dist"
-  },
-  "author": "Robson Nascimento",
+  "main": "index.js",
+  "repository": "https://github.com/rluisnpt1/starterkit.git",
+  "author": "Robson Nascimento <robsonluisn@icloud.com>",
   "license": "MIT",
-  "dependencies": {
-    "whatwg-fetch": "3.6.2"
+  "scripts": {
+    "build": "webpack --config ./build/webpack/local.webpack.config.babel.js --env=localdev",
+    "start": "webpack serve --open --config ./build/webpack/local.webpack.config.babel.js --env=localdev"
   },
   "devDependencies": {
-    "@babel/cli": "7.13.0",
-    "@babel/core": "7.13.8",
-    "@babel/node": "^7.14.5",
-    "@babel/preset-env": "7.13.8",
-    "@babel/register": "7.13.8",
-    "babel-loader": "8.2.2",
-    "chai": "4.3.0",
-    "chalk": "4.1.0",
-    "cheerio": "^1.0.0-rc.10",
-    "compression": "1.7.4",
-    "cross-env": "7.0.3",
-    "css-loader": "5.1.0",
-    "eslint": "7.21.0",
-    "eslint-plugin-import": "2.22.1",
-    "eslint-watch": "7.0.0",
-    "express": "4.17.1",
-    "faker": "^5.5.3",
-    "html-webpack-plugin": "5.2.0",
-    "jsdom": "^16.6.0",
-    "json-schema-faker": "0.5.0-rcv.27",
-    "json-server": "0.16.3",
-    "localtunnel": "2.0.1",
-    "mini-css-extract-plugin": "^1.6.0",
-    "mocha": "8.3.0",
-    "npm-run-all": "4.1.5",
-    "numeral": "2.0.6",
-    "open": "7.4.2",
-    "rimraf": "3.0.2",
-    "style-loader": "2.0.0",
-    "surge": "0.21.7",
-    "webpack": "5.24.2",
-    "webpack-dev-middleware": "4.1.0"
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "@typescript-eslint/parser": "^5.1.0",
+    "autoprefixer": "^10.3.7",
+    "babel-loader": "^8.0.0",
+    "core-js": "^3.0.0",
+    "css-loader": "^6.4.0",
+    "eslint": "^8.0.1",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-webpack-plugin": "^3.0.1",
+    "html-webpack-plugin": "^5.4.0",
+    "postcss": "^8.3.11",
+    "postcss-loader": "^6.2.0",
+    "postcss-preset-env": "^6.7.0",
+    "sass": "1.32",
+    "sass-loader": "^12.2.0",
+    "source-map-loader": "^3.0.0",
+    "style-loader": "^3.3.1",
+    "terser-webpack-plugin": "^5.2.4",
+    "tsconfig-paths-webpack-plugin": "^3.5.1",
+    "typescript": "^4.0.0",
+    "typescript-eslint": "^0.0.1-alpha.0",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.3.1"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          },
+          "corejs": "3",
+          "useBuiltIns": "usage"
+        }
+      ]
+    ]
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "globals": {
+      "fetch": true
+    },
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": 2019,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "plugins": [
+      "@typescript-eslint",
+      "react",
+      "react-hooks",
+      "import"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:react/recommended",
+      "plugin:react-hooks/recommended"
+    ],
+    "rules": {
+      "@typescript-eslint/no-unused-vars": [
+        "warn"
+      ],
+      "react/prop-types": "warn",
+      "import/no-unresolved": "warn",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn"
+    },
+    "settings": {
+      "react": {
+        "pragma": "React",
+        "version": "detect"
+      },
+      "import/parsers": {
+        "@typescript-eslint/parser": [
+          ".ts",
+          ".tsx"
+        ]
+      },
+      "import/resolver": {
+        "node": {
+          "extensions": [
+            ".ts",
+            ".tsx"
+          ]
+        },
+        "typescript": {
+          "extensions": [
+            ".ts",
+            ".tsx",
+            ".js",
+            ".jsx"
+          ],
+          "alwaysTryTypes": true
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.10.2",
+    "@types/react": "^17.0.31",
+    "@types/react-bootstrap": "^0.32.27",
+    "@types/react-dom": "^17.0.10",
+    "@types/react-router": "^5.1.17",
+    "@types/react-router-dom": "^5.3.1",
+    "bootstrap": "^5.0.0",
+    "font-awesome": "^4.7.0",
+    "history": "^5.0.1",
+    "react": "^17.0.0",
+    "react-bootstrap": "^2.0.0-beta.5",
+    "react-dom": "^17.0.0",
+    "react-router": "^6.0.0-beta.2",
+    "react-router-dom": "^6.0.0-beta.2"
   }
 }
