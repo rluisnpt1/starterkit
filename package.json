@@ -6,8 +6,8 @@
   "author": "Robson Nascimento <robsonluisn@icloud.com>",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --config ./build/webpack/local.webpack.config.babel.js --env=localdev",
-    "start": "webpack serve --open --config ./build/webpack/local.webpack.config.babel.js --env=localdev"
+    "build": "webpack --config ./builder/webpack/local.webpack.config.babel.js --env=localdev",
+    "start": "webpack serve --open --config ./builder/webpack/local.webpack.config.babel.js --env=localdev"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
