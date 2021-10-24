@@ -6,7 +6,7 @@ import {
   Outlet,
   Navigate,
 } from 'react-router-dom'
-import { HomeRoute } from './routes/home' //earlier I talked about the @routes path alias in the TSConfig, this is an example of using it.  It's a short cut so you don't have to folder drill with ../../ etc all over your app.
+import { HomeRoute } from './routes/home'
 
 export const App = (): React.ReactElement => {
   return (
